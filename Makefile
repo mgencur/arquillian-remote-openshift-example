@@ -17,7 +17,7 @@ _IMAGE = $(_DOCKER_REGISTRY)/$(_TEST_PROJECT)/$(DEV_IMAGE_NAME)
 _TESTRUNNER_PORT = 80
 
 build-image:
-	sudo docker build --force-rm -t $(DEV_IMAGE_NAME) ./infinispan-server
+	sudo docker build -t $(DEV_IMAGE_NAME) ./infinispan-server
 .PHONY: build-image
 
 _login_to_docker:
@@ -62,8 +62,8 @@ test-functional: deploy-testrunner-route
 .PHONY: test-functional
 
 deploy-testrunner-route:
-	oc create -f ./functional-tests/src/test/resources/eap7-testrunner-service.json
-	oc expose svc/testrunner-http
+#	oc create -f ./functional-tests/src/test/resources/eap7-testrunner-service.json
+#	oc expose svc/testrunner-http
 .PHONY: deploy-testrunner-route
 
 clean-maven:

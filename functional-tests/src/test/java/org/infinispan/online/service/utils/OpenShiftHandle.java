@@ -29,7 +29,7 @@ public class OpenShiftHandle {
             host = spec.getClusterIP();
          }
          //use HTTP as the protocol is unimportant and we don't want to register custom handlers
-         return new URL(HTTP_PROTOCOL, host, spec.getPorts().get(0).getPort(), "/");
+         return new URL(HTTP_PROTOCOL, host, 11222, "/");
       }
       return null;
    }

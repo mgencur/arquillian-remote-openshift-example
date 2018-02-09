@@ -12,8 +12,8 @@
       <!-- Fetch the logs from Openshift and pods, and save them into target/surefire-reports -->
       <property name="logs.copy">true</property>
 
-      <property name="namespace.cleanup.enabled">true</property>
-      <property name="namespace.destroy.enabled">true</property>
+      <!--<property name="namespace.cleanup.enabled">true</property>-->
+      <!--<property name="namespace.destroy.enabled">true</property>-->
    </extension>
 
    <container qualifier="testrunner" mode="suite" default="true">

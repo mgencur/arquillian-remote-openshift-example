@@ -4,13 +4,14 @@
 
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.infinispan</groupId>
-   <artifactId>datagrid-online-services-functional-tests</artifactId>
+   <artifactId>arquillian-remote-openshift-example-functional-tests</artifactId>
    <version>1.0.0-SNAPSHOT</version>
 
    <properties>
       <maven.compiler.source>1.8</maven.compiler.source>
       <maven.compiler.target>1.8</maven.compiler.target>
       <version.arquillian.bom>1.1.8.Final</version.arquillian.bom>
+      <version.infinispan.bom>9.2.0.CR2</version.infinispan.bom>
       <openshift-client.version>3.0.3</openshift-client.version>
       <arquillian-cube-openshift.version>1.10.0</arquillian-cube-openshift.version>
       <assertj-core.version>3.8.0</assertj-core.version>
@@ -28,11 +29,22 @@
             <type>pom</type>
             <scope>import</scope>
          </dependency>
+         <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-bom</artifactId>
+            <version>${version.infinispan.bom}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
       </dependencies>
    </dependencyManagement>
 
    <dependencies>
-         <dependency>
+      <dependency>
+         <groupId>org.infinispan</groupId>
+         <artifactId>infinispan-client-hotrod</artifactId>
+      </dependency>
+      <dependency>
          <groupId>io.fabric8</groupId>
          <artifactId>openshift-client</artifactId>
          <version>${openshift-client.version}</version>
