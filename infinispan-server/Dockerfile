@@ -1,0 +1,3 @@
+FROM jboss/infinispan-server
+
+#Do something here ...

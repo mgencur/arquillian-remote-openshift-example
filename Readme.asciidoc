@@ -1,0 +1,12 @@
+In order to run the functional test suite against a remote OpenShift instance, follow these steps:
+
+1. Login to the remote instance from command line using `oc`
+
+   oc login <openshift address> --token=<token>
+
+2. Set the environment variable with the adddress of the remote OpenShift docker registry
+
+   export OPENSHIFT_ONLINE_REGISTRY=<registry address>
+
+3. Invoke `make test-remote`.
+This procedure will create a new project in the remote OpenShift, build the image, push the image to the OpenShift internal registry, install the templates in the project and invoke functional tests.
