@@ -65,14 +65,9 @@ create-app:
 	oc new-app $(DEV_IMAGE_NAME) -e "APP_USER=user" -e "APP_PASS=changeme"
 .PHONY: create-app
 
-test-functional: deploy-testrunner-route
-	$(MVN_COMMAND) -Dkubernetes.auth.token=$(shell oc whoami -t) -DTESTRUNNER_HOST=$(shell oc get routes | grep testrunner | awk '{print $$2}') -DTESTRUNNER_PORT=${_TESTRUNNER_PORT} clean test -f functional-tests/pom.xml
+test-functional:
+	$(MVN_COMMAND) -Dkubernetes.auth.token=$(shell oc whoami -t) clean test -f functional-tests/pom.xml
 .PHONY: test-functional
-
-deploy-testrunner-route:
-	oc create -f ./functional-tests/src/test/resources/wildfly11-testrunner-service.json
-	oc create -f ./functional-tests/src/test/resources/wildfly11-testrunner-route.json
-.PHONY: deploy-testrunner-route
 
 clean-maven:
 	$(MVN_COMMAND) clean -f functional-tests/pom.xml || true
