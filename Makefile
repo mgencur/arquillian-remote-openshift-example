@@ -1,21 +1,11 @@
-DEV_IMAGE_ORG = jboss-dataservices
-DOCKER_REGISTRY_ENGINEERING =
-DOCKER_REGISTRY_REDHAT =
 DEV_IMAGE_NAME = infinispan-server-dev
 TESTRUNNER_IMAGE_NAME = wildfly11-testrunner
-
-CE_DOCKER = $(shell docker version | grep Version | head -n 1 | grep -e "-ce")
-ifneq ($(CE_DOCKER),)
-DOCKER_REGISTRY_ENGINEERING = docker-registry.engineering.redhat.com
-DOCKER_REGISTRY_REDHAT = registry.access.redhat.com/
-endif
 
 MVN_COMMAND = mvn
 _TEST_PROJECT = myproject
 _APP_NAME = my-app
-_DOCKER_REGISTRY = $(OPENSHIFT_ONLINE_REGISTRY)
-_IMAGE = $(_DOCKER_REGISTRY)/$(_TEST_PROJECT)/$(DEV_IMAGE_NAME)
-_TESTRUNNER_IMAGE = $(_DOCKER_REGISTRY)/$(_TEST_PROJECT)/$(TESTRUNNER_IMAGE_NAME)
+_IMAGE = $(DOCKER_REGISTRY)/$(_TEST_PROJECT)/$(DEV_IMAGE_NAME)
+_TESTRUNNER_IMAGE = $(DOCKER_REGISTRY)/$(_TEST_PROJECT)/$(TESTRUNNER_IMAGE_NAME)
 _TESTRUNNER_PORT = 80
 
 build-image:
@@ -24,7 +14,7 @@ build-image:
 .PHONY: build-image
 
 _login_to_docker:
-	sudo docker login -u $(shell oc whoami) -p $(shell oc whoami -t) $(_DOCKER_REGISTRY)
+	sudo docker login -u $(shell oc whoami) -p $(shell oc whoami -t) $(DOCKER_REGISTRY)
 .PHONY: _login_to_docker
 
 push-image-common:
